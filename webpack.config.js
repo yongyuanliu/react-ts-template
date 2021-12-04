@@ -9,8 +9,9 @@ const config = {
         index: "./src/index.tsx",
     },
     output: {
-        path: resolve(__dirname, "dist"),
-        filename: "bundle.js",
+        path: resolve(__dirname, "public"),
+        filename: "[name]-bundle.js",
+        clean: true
     },
     resolve: {
         extensions: [".js", ".jsx", ".ts", ".tsx"],
@@ -22,6 +23,15 @@ const config = {
                 use: "babel-loader",
                 exclude: /node_modules/,
             },
+            {
+                test: /\.m?js$/,
+                exclude: /node_modules/,
+                use: ['babel-loader']
+            },
+            {
+                test: /\.m?(sa|sc|c)ss$/i,
+                use: ["style-loader", 'css-loader']
+            }
         ],
     },
     plugins: [
